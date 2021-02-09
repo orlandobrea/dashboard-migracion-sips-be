@@ -1,0 +1,34 @@
+---
+kind: pipeline
+type: kubernetes
+name: default
+
+steps:
+  - name: precheck
+    image: andesnqn/andes-check-image-exist:latest
+    pull: always
+    environment:
+      # REGISTRY_URL: ${DOCKER_REGISTRY_PROTOCOL}://${DOCKER_REGISTRY_URL}
+      IMAGE: orlandobrea/andes-sips-dashboard-be
+      TAG: ${DRONE_BRANCH}-${DRONE_COMMIT_SHA}
+  - name: build
+    image: plugins/docker  
+    when:
+      status:
+        - failure    
+    settings:
+      debug: true
+      username: 
+        from_secret: REGISTRY_USER
+      password:
+        from_secret: REGISTRY_PASSWORD
+      # registry: ${DOCKER_REGISTRY_URL}
+      # repo: ${DOCKER_REGISTRY_URL}/andes/api
+      tags: ["${DRONE_BRANCH}", "${DRONE_BRANCH}-${DRONE_COMMIT_SHA}"]
+      insecure: true
+
+      
+# Params example:
+# DRONE_BRANCH: master
+# DOCKER_REGISTRY_URL: registry.192-168-68-2.nip.io:30443
+
