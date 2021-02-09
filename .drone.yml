@@ -4,13 +4,13 @@ type: kubernetes
 name: default
 
 steps:
-  - name: precheck
-    image: andesnqn/andes-check-image-exist:latest
-    pull: always
-    environment:
-      # REGISTRY_URL: ${DOCKER_REGISTRY_PROTOCOL}://${DOCKER_REGISTRY_URL}
-      IMAGE: orlandobrea/andes-sips-dashboard-be
-      TAG: ${DRONE_BRANCH}-${DRONE_COMMIT_SHA}
+  # - name: precheck
+  #   image: andesnqn/andes-check-image-exist:latest
+  #   pull: always
+  #   environment:
+  #     # REGISTRY_URL: ${DOCKER_REGISTRY_PROTOCOL}://${DOCKER_REGISTRY_URL}
+  #     IMAGE: orlandobrea/andes-sips-dashboard-be
+  #     TAG: ${DRONE_BRANCH}-${DRONE_COMMIT_SHA}
   - name: build
     image: plugins/docker  
     when:
@@ -23,7 +23,7 @@ steps:
       password:
         from_secret: REGISTRY_PASSWORD
       # registry: ${DOCKER_REGISTRY_URL}
-      # repo: ${DOCKER_REGISTRY_URL}/andes/api
+       repo: orlandobrea/dashboard-migracion-sips-be 
       tags: ["${DRONE_BRANCH}", "${DRONE_BRANCH}-${DRONE_COMMIT_SHA}"]
       insecure: true
 
