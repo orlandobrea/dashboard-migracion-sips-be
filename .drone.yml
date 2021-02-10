@@ -13,9 +13,9 @@ steps:
       TAG: ${DRONE_BRANCH}-${DRONE_COMMIT_SHA}
   - name: build
     image: plugins/docker  
-    # when:
-    #   status:
-    #     - failure    
+    when:
+      status:
+        - failure    
     settings:
       debug: true
       username: 
