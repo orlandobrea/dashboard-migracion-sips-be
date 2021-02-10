@@ -25,6 +25,7 @@ steps:
       # registry: ${DOCKER_REGISTRY_URL}
       repo: orlandobrea/dashboard-migracion-sips-be 
       tags: ["${DRONE_BRANCH}", "${DRONE_BRANCH}-${DRONE_COMMIT_SHA}"]
+      dockerfile: Dockerfile
       # insecure: true
 
       
