@@ -5,7 +5,7 @@ name: default
 
 steps:
   - name: precheck
-    image: andesnqn/andes-check-image-exist:latest
+    image: orlandobrea/andes-check-image-exist:latest
     pull: always
     environment:
       # REGISTRY_URL: ${DOCKER_REGISTRY_PROTOCOL}://${DOCKER_REGISTRY_URL}
