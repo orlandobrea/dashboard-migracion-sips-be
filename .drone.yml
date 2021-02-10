@@ -8,7 +8,7 @@ steps:
     image: orlandobrea/andes-check-image-exist:latest
     pull: always
     environment:
-      REGISTRY_URL: registry.hub.docker.com
+      # REGISTRY_URL: registry.hub.docker.com
       IMAGE: orlandobrea/andes-sips-dashboard-be
       TAG: ${DRONE_BRANCH}-${DRONE_COMMIT_SHA}
       REGISTRY_USER: 
