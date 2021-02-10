@@ -11,6 +11,10 @@ steps:
       REGISTRY_URL: registry.hub.docker.com
       IMAGE: orlandobrea/andes-sips-dashboard-be
       TAG: ${DRONE_BRANCH}-${DRONE_COMMIT_SHA}
+      username: 
+        from_secret: REGISTRY_USER
+      password:
+        from_secret: REGISTRY_PASSWORD
   - name: build
     image: plugins/docker  
     when:
