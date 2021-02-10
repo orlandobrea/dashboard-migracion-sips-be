@@ -17,7 +17,7 @@ steps:
       status:
         - failure    
     settings:
-      debug: true
+      debug: false
       username: 
         from_secret: REGISTRY_USER
       password:
