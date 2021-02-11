@@ -4,17 +4,25 @@ type: kubernetes
 name: default
 
 steps:
-  - name: precheck
-    image: orlandobrea/andes-check-image-exist:latest
-    pull: always
-    environment:
-      # REGISTRY_URL: registry.hub.docker.com
-      IMAGE_NAME: orlandobrea/dashboard-migracion-sips-be
-      TAG: ${DRONE_BRANCH}-${DRONE_COMMIT_SHA}
-      REGISTRY_USER: 
-        from_secret: REGISTRY_USER
-      REGISTRY_PASSWORD:
-        from_secret: REGISTRY_PASSWORD
+  # - name: precheck
+  #   image: orlandobrea/andes-check-image-exist:latest
+  #   pull: always
+  #   environment:
+  #     # REGISTRY_URL: registry.hub.docker.com
+  #     IMAGE_NAME: orlandobrea/dashboard-migracion-sips-be
+  #     TAG: ${DRONE_BRANCH}-${DRONE_COMMIT_SHA}
+  #     REGISTRY_USER: 
+  #       from_secret: REGISTRY_USER
+  #     REGISTRY_PASSWORD:
+  #       from_secret: REGISTRY_PASSWORD
+  # Test
+
+  # Release
+  - name: release
+    image: docker:dind
+    cmd:
+      - npm install
+      - npx semantic-release
   - name: build
     image: plugins/docker  
     when:

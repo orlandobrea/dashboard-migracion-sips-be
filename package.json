@@ -14,5 +14,8 @@
     "express": "^4.17.1",
     "express-cors": "^0.0.3",
     "mssql": "^6.3.1"
+  },
+  "devDependencies": {
+    "semantic-release": "^17.3.8"
   }
 }
