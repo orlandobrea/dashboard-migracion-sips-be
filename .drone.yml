@@ -20,7 +20,8 @@ steps:
   # Release
   - name: release
     image: docker:dind
-    privileged: true
+    settings:
+      privileged: true
     cmd:
       - npm install
       - npx semantic-release
