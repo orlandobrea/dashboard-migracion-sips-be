@@ -19,7 +19,7 @@ steps:
 
   # Release
   - name: release
-    image: docker:dind
+    image: node:alpine
     commands:
       - npm install
       - npx semantic-release
