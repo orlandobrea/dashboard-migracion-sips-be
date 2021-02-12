@@ -19,12 +19,12 @@ steps:
 
   # Release
   - name: release
-    image: node:alpine
+    image: docker:dind
     environment:
       GITHUB_TOKEN:
         from_secret: GITHUB_TOKEN
     commands:
-      - apk update && apk add git docker
+      - apk update && apk add git nodejs npm
       - npm install
       - npx semantic-release
       # - export GIT_HASH=$(git log -1 --format=format:"%H")
