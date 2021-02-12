@@ -38,9 +38,9 @@ steps:
       # - docker push orlandobrea/dashboard-migracion-sips-be:$(node -p "require('./package.json').version")
   - name: build
     image: plugins/docker  
-    when:
-      status:
-        - failure    
+    # when:
+    #   status:
+    #     - failure    
     settings:
       debug: false
       username: 
