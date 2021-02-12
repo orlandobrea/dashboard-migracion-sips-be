@@ -29,10 +29,10 @@ steps:
       - npx semantic-release
       # - export GIT_HASH=$(git log -1 --format=format:"%H")
       - export APP_VER=$(node -p "require('./package.json').version")
-      - docker build -t orlandobrea/dashboard-migracion-sips-be:latest -t orlandobrea/dashboard-migracion-sips-be:"${DRONE_BRANCH}-${DRONE_COMMIT_SHA}" -t orlandobrea/dashboard-migracion-sips-be:"${APP_VER}"
+      - docker build -t orlandobrea/dashboard-migracion-sips-be:latest -t orlandobrea/dashboard-migracion-sips-be:"${DRONE_BRANCH}-${DRONE_COMMIT_SHA}" -t orlandobrea/dashboard-migracion-sips-be:$(node -p "require('./package.json').version")
       - docker push orlandobrea/dashboard-migracion-sips-be:latest
       - docker push orlandobrea/dashboard-migracion-sips-be:"${DRONE_BRANCH}-${DRONE_COMMIT_SHA}"
-      - docker push orlandobrea/dashboard-migracion-sips-be:"${APP_VER}"
+      - docker push orlandobrea/dashboard-migracion-sips-be:$(node -p "require('./package.json').version")
 
   # - name: build
   #   image: plugins/docker  
