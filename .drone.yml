@@ -24,27 +24,33 @@ steps:
       GITHUB_TOKEN:
         from_secret: GITHUB_TOKEN
     commands:
-      - apk update && apk add git
+      - apk update && apk add git docker
       - npm install
       - npx semantic-release
-  - name: build
-    image: plugins/docker  
-    when:
-      status:
-        - failure    
-    settings:
-      debug: false
-      username: 
-        from_secret: REGISTRY_USER
-      password:
-        from_secret: REGISTRY_PASSWORD
-      # registry: ${DOCKER_REGISTRY_URL}
-      repo: orlandobrea/dashboard-migracion-sips-be 
-      tags: ["${DRONE_BRANCH}", "${DRONE_BRANCH}-${DRONE_COMMIT_SHA}"]
-      # insecure: true
+      # - export GIT_HASH=$(git log -1 --format=format:"%H")
+      - export APP_VER=$(node -p "require('./package.json').version")
+      - docker build -t orlandobrea/dashboard-migracion-sips-be:latest -t orlandobrea/dashboard-migracion-sips-be:"${DRONE_BRANCH}-${DRONE_COMMIT_SHA}" -t orlandobrea/dashboard-migracion-sips-be:"${APP_VER}"
+      - docker push orlandobrea/dashboard-migracion-sips-be:latest
+      - docker push orlandobrea/dashboard-migracion-sips-be:"${DRONE_BRANCH}-${DRONE_COMMIT_SHA}"
+      - docker push orlandobrea/dashboard-migracion-sips-be:"${APP_VER}"
+
+  # - name: build
+  #   image: plugins/docker  
+  #   when:
+  #     status:
+  #       - failure    
+  #   settings:
+  #     debug: false
+  #     username: 
+  #       from_secret: REGISTRY_USER
+  #     password:
+  #       from_secret: REGISTRY_PASSWORD
+  #     # registry: ${DOCKER_REGISTRY_URL}
+  #     repo: orlandobrea/dashboard-migracion-sips-be 
+  #     tags: ["${DRONE_BRANCH}", "${DRONE_BRANCH}-${DRONE_COMMIT_SHA}"]
+  #     # insecure: true
 
       
 # Params example:
 # DRONE_BRANCH: master
 # DOCKER_REGISTRY_URL: registry.192-168-68-2.nip.io:30443
-
