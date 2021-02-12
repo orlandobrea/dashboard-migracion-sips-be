@@ -49,7 +49,7 @@ steps:
         from_secret: REGISTRY_PASSWORD
       # registry: ${DOCKER_REGISTRY_URL}
       repo: orlandobrea/dashboard-migracion-sips-be 
-      tags: ["${DRONE_BRANCH}", "${DRONE_BRANCH}-${DRONE_COMMIT_SHA}", "${DONE_TAG}"]
+      tags: ["${DRONE_BRANCH}", "${DRONE_BRANCH}-${DRONE_COMMIT_SHA}", "${DRONE_TAG}"]
       # insecure: true
 
 # services:
