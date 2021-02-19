@@ -48,11 +48,11 @@ steps:
       # tags: ["${DRONE_BRANCH}", "${DRONE_BRANCH}-${DRONE_COMMIT_SHA}", $(cat APP_VERSION)]
       # insecure: true
   # Gitops Release
-  - name: gitops_release
-    image: alpine/git
-    commands:
+  # - name: gitops_release
+    # image: alpine/git
+    # commands:
       # - apk update && apk add yq
-      - git clone https://github.com/orlandobrea/gitops-kubernetes.git
+      # - git clone https://github.com/orlandobrea/gitops-kubernetes.git
       # - git checkout $DRONE_BRANCH
       # - echo "Actualizando version del deployment a "$(cat .version_tag)
       # - cd dashboard_migration_sips 
