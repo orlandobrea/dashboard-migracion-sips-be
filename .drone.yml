@@ -54,7 +54,7 @@ steps:
       repo: orlandobrea/dashboard-migracion-sips-be 
       # tags: ["${DRONE_BRANCH}", "${DRONE_BRANCH}-${DRONE_COMMIT_SHA}", $(cat APP_VERSION)]
       # insecure: true
-   # Gitops Release
+  # Gitops Release
   - name: gitops_release
     image: alpine/git
     commands:
@@ -65,20 +65,3 @@ steps:
       - cd dashboard_migration_sips && yq w -i values.yaml "backend.version" $(cat .version_tag) 
       - git commit -m "ci: release ${$(cat .version_tag)}"
       - git push origin ${DRONE_BRANCH}
-#kubectl patch --local -f pvc.yml -p '{"spec":{"template":{"spec":{"resources": {"requests":{"storage": "10Gi"}}}}}}' -o yaml
-# services:
-#   - name: docker
-#     image: docker:dind
-#     privileged: true
-#     volumes:
-#       - name: dockersock
-#         path: /var/run
-
-      
-# Params example:
-# DRONE_BRANCH: master
-# DOCKER_REGISTRY_URL: registry.192-168-68-2.nip.io:30443
-
-# volumnes:
-#   - name: dockersock
-#     temp: {}
