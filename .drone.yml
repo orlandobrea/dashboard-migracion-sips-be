@@ -35,15 +35,8 @@ steps:
       - node -p "require('./package.json').version" | tr -d '\n' > .version_tag
       - echo ",${DRONE_BRANCH},${DRONE_BRANCH}-${DRONE_COMMIT_SHA},latest" | tr -d '\n' >> .tags
       - echo "Tagged version "$(cat .tags)
-      # - docker build -t orlandobrea/dashboard-migracion-sips-be:latest -t orlandobrea/dashboard-migracion-sips-be:"${DRONE_BRANCH}-${DRONE_COMMIT_SHA}" -t orlandobrea/dashboard-migracion-sips-be:$(node -p "require('./package.json').version") .
-      # - docker push orlandobrea/dashboard-migracion-sips-be:latest
-      # - docker push orlandobrea/dashboard-migracion-sips-be:"${DRONE_BRANCH}-${DRONE_COMMIT_SHA}"
-      # - docker push orlandobrea/dashboard-migracion-sips-be:$(node -p "require:q('./package.json').version")
   - name: build
     image: plugins/docker  
-    # when:
-    #   status:
-    #     - failure    
     settings:
       debug: false
       username: 
@@ -63,6 +56,6 @@ steps:
       - git checkout "${DRONE_BRANCH}"
       - echo "Actualizando version del deployment a "$(cat .version_tag)
       - cd dashboard_migration_sips 
-      - yq w -i values.yaml "backend.version" $(cat .version_tag) 
+      - yq w -i values.yaml backend.version $(cat .version_tag) 
       - git commit -m "ci: release ${$(cat .version_tag)}"
       - git push origin "${DRONE_BRANCH}"
