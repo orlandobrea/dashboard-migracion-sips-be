@@ -33,7 +33,7 @@ steps:
     commands:
       - apk update && apk add yq
       - git clone https://github.com/orlandobrea/gitops-kubernetes.git
-      - cd gitops-kubermetes
+      - cd gitops-kubernetes
       - git checkout $DRONE_BRANCH
       - echo "Actualizando version del deployment a "$(cat .version_tag)
       - cd dashboard_migration_sips 
