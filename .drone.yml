@@ -26,8 +26,8 @@ steps:
       password:
         from_secret: REGISTRY_PASSWORD
       repo: orlandobrea/dashboard-migracion-sips-be 
-  - name: gitops_release
-    image: alpine/git
+  - name: gitops
+    image: "alpine/git"
     commands:
       - apk update && apk add yq
       - git clone https://github.com/orlandobrea/gitops-kubernetes.git
