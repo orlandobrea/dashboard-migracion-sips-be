@@ -33,7 +33,7 @@ steps:
       # - export GIT_HASH=$(git log -1 --format=format:"%H")
       - node -p "require('./package.json').version" | tr -d '\n' > .tags
       - echo ",${DRONE_BRANCH},${DRONE_BRANCH}-${DRONE_COMMIT_SHA},latest" | tr -d '\n' >> .tags
-      - node -p "require('./package.json').version" | tr -d '\n' > .version_tag
+      # - node -p "require('./package.json').version" | tr -d '\n' > .version_tag
       - echo "Tagged version "$(cat .tags)
   - name: build
     image: plugins/docker  
