@@ -15,7 +15,7 @@ steps:
       - npx semantic-release
       - node -p "require('./package.json').version" | tr -d '\n' > .tags
       - echo ",${DRONE_BRANCH},${DRONE_BRANCH}-${DRONE_COMMIT_SHA},latest" | tr -d '\n' >> .tags
-      - node -p "require('./package.json').version" | tr -d '\n' > .tags_release
+      - node -p "require('./package.json').version" | tr -d '\n' > .version_tag
       - echo "Tagged version "$(cat .tags)
 
   - name: build
@@ -37,3 +37,5 @@ steps:
       - echo "Actualizando version del deployment a "$(cat .version_tag)
       - cd dashboard_migration_sips 
       - yq w -i values.yaml backend.version $(cat .version_tag)
+      - git commit -m "ci: release ${$(cat .version_tag)}"
+      - git push origin $DRONE_BRANCH
