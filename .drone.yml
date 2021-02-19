@@ -59,7 +59,7 @@ steps:
     commands:
       - git clone https://github.com/orlandobrea/gitops-kubernetes.git
       - echo "TAGS......."
-      - echo .tags
+      - echo "Tagged version "$(cat .tags)
 #kubectl patch --local -f pvc.yml -p '{"spec":{"template":{"spec":{"resources": {"requests":{"storage": "10Gi"}}}}}}' -o yaml
 # services:
 #   - name: docker
