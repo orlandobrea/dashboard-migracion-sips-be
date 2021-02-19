@@ -56,7 +56,7 @@ steps:
       - git checkout $DRONE_BRANCH
       - echo "Actualizando version del deployment a "$(cat .version_tag)
       - cd dashboard_migration_sips 
-      - yq w -i values.yaml backend.version "0.0.1"
+      - yq w -i values.yaml "backend.version" "0.0.1"
       # - yq w -i values.yaml backend.version $(cat .version_tag)
       # - git commit -m "ci: release ${$(cat .version_tag)}"
       # - git push origin $DRONE_BRANCH
