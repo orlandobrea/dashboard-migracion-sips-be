@@ -17,7 +17,7 @@ steps:
   #       from_secret: REGISTRY_PASSWORD
   # Test
 
-  # Release
+  # Docker release
   - name: release
     image: docker:dind
     # volumes:
@@ -32,12 +32,12 @@ steps:
       - npx semantic-release
       # - export GIT_HASH=$(git log -1 --format=format:"%H")
       - node -p "require('./package.json').version" | tr -d '\n' > .tags
-      - echo ",${DRONE_BRANCH},${DRONE_BRANCH}-${DRONE_COMMIT_SHA}" | tr -d '\n' >> .tags
+      - echo ",${DRONE_BRANCH},${DRONE_BRANCH}-${DRONE_COMMIT_SHA},latest" | tr -d '\n' >> .tags
       - echo "Tagged version "$(cat .tags)
       # - docker build -t orlandobrea/dashboard-migracion-sips-be:latest -t orlandobrea/dashboard-migracion-sips-be:"${DRONE_BRANCH}-${DRONE_COMMIT_SHA}" -t orlandobrea/dashboard-migracion-sips-be:$(node -p "require('./package.json').version") .
       # - docker push orlandobrea/dashboard-migracion-sips-be:latest
       # - docker push orlandobrea/dashboard-migracion-sips-be:"${DRONE_BRANCH}-${DRONE_COMMIT_SHA}"
-      # - docker push orlandobrea/dashboard-migracion-sips-be:$(node -p "require('./package.json').version")
+      # - docker push orlandobrea/dashboard-migracion-sips-be:$(node -p "require:q('./package.json').version")
   - name: build
     image: plugins/docker  
     # when:
@@ -53,7 +53,14 @@ steps:
       repo: orlandobrea/dashboard-migracion-sips-be 
       # tags: ["${DRONE_BRANCH}", "${DRONE_BRANCH}-${DRONE_COMMIT_SHA}", $(cat APP_VERSION)]
       # insecure: true
-
+   # Gitops Release
+  - name: gitops_release
+    image: alpine/git
+    commands:
+      - git clone https://github.com/orlandobrea/gitops-kubernetes.git
+      - echo "TAGS......."
+      - echo .tags
+#kubectl patch --local -f pvc.yml -p '{"spec":{"template":{"spec":{"resources": {"requests":{"storage": "10Gi"}}}}}}' -o yaml
 # services:
 #   - name: docker
 #     image: docker:dind
