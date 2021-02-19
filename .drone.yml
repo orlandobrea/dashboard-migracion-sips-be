@@ -4,20 +4,6 @@ type: kubernetes
 name: default
 
 steps:
-  # - name: precheck
-  #   image: orlandobrea/andes-check-image-exist:latest
-  #   pull: always
-  #   environment:
-  #     # REGISTRY_URL: registry.hub.docker.com
-  #     IMAGE_NAME: orlandobrea/dashboard-migracion-sips-be
-  #     TAG: ${DRONE_BRANCH}-${DRONE_COMMIT_SHA}
-  #     REGISTRY_USER: 
-  #       from_secret: REGISTRY_USER
-  #     REGISTRY_PASSWORD:
-  #       from_secret: REGISTRY_PASSWORD
-  # Test
-
-  # Docker release
   - name: release
     image: docker:dind
     environment:
@@ -29,7 +15,6 @@ steps:
       - npx semantic-release
       - node -p "require('./package.json').version" | tr -d '\n' > .tags
       - echo ",${DRONE_BRANCH},${DRONE_BRANCH}-${DRONE_COMMIT_SHA},latest" | tr -d '\n' >> .tags
-# - node -p "require('./package.json').version" | tr -d '\n' > .version_tag
       - echo "Tagged version "$(cat .tags)
 
   - name: build
