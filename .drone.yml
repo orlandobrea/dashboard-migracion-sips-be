@@ -33,3 +33,4 @@ steps:
     commands:
       - apk update && apk add yq
       - git clone https://github.com/orlandobrea/gitops-kubernetes.git
+      - git checkout $DRONE_BRANCH
