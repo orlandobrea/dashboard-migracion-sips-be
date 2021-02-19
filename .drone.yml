@@ -15,6 +15,7 @@ steps:
       - npx semantic-release
       - node -p "require('./package.json').version" | tr -d '\n' > .tags
       - echo ",${DRONE_BRANCH},${DRONE_BRANCH}-${DRONE_COMMIT_SHA},latest" | tr -d '\n' >> .tags
+      - node -p "require('./package.json').version" | tr -d '\n' > .tags_release
       - echo "Tagged version "$(cat .tags)
 
   - name: build
@@ -27,3 +28,8 @@ steps:
         from_secret: REGISTRY_PASSWORD
       repo: orlandobrea/dashboard-migracion-sips-be 
 
+  - name: gitops_release
+    image: alpine/git
+    commands:
+      - apk update && apk add yq
+      - git clone https://github.com/orlandobrea/gitops-kubernetes.git
