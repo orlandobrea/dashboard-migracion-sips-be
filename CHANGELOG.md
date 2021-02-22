@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.8...v1.0.9) (2021-02-22)
+
+
+### Bug Fixes
+
+* build process complete ([9a6e0b9](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/9a6e0b9c45302d2cd91dd3eb7c45497eb3d6ad78))
+
 ## [1.0.8](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.7...v1.0.8) (2021-02-22)
 
 
