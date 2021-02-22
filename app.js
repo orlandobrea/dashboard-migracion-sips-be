@@ -2,6 +2,7 @@ const app = require('express')();
 const cors = require('express-cors');
 const mssql = require('mssql');
 const dotenv = require('dotenv');
+const { version } = require('./package.json')
 
 dotenv.config();
 const PORT = process.env.PORT ? process.env.PORT : 3000;
@@ -22,6 +23,11 @@ const connect = async () => {
   }
 };
 
+app.get('/version', (req, res) => {
+  res.json({
+    version: version
+  })
+})
 
 app.get('/health', (req, res) => {
   res.json({
