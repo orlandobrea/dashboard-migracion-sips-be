@@ -41,7 +41,7 @@ steps:
       - ls -lah
       - echo "Actualizando version del deployment a "$(cat ../.version_tag)
       - cd dashboard_migration_sips 
-      - yq w -i values.yaml backend.version $(cat ../.version_tag)
+      - yq w -i values.yaml backend.version $(cat ../../.version_tag)
       - git add values.yaml
-      - git commit -m "release "$(cat ../.version_tag)
+      - git commit -m "release "$(cat ../../.version_tag)
       - git push origin $DRONE_BRANCH
