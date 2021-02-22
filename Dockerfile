@@ -2,7 +2,7 @@ FROM node:15-alpine
 
 WORKDIR /app
 COPY package.json /app/
-RUN npm install
+RUN npm install --only=prod
 COPY app.js /app/
 
 ENV DB_SERVER localhost
