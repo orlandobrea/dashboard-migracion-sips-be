@@ -10,7 +10,7 @@ steps:
       GITHUB_TOKEN:
         from_secret: GITHUB_TOKEN
     commands:
-      - apk update && apk add git nodejs npm
+      - apk update && apk add git nodejs npm jq
       - npm install
       - npx semantic-release
       - node -p "require('./package.json').version" | tr -d '\n' > .tags
