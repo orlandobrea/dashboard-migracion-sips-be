@@ -4,6 +4,7 @@ type: kubernetes
 name: default
 
 steps:
+
   - name: release
     image: docker:dind
     environment:
@@ -18,27 +19,23 @@ steps:
       - node -p "require('./package.json').version" | tr -d '\n' > .version_tag
       - echo "Tagged version "$(cat .tags)
 
-  # - name: build
-  #   image: plugins/docker  
-  #   settings:
-  #     debug: false
-  #     username: 
-  #       from_secret: REGISTRY_USER
-  #     password:
-  #       from_secret: REGISTRY_PASSWORD
-  #     repo: orlandobrea/dashboard-migracion-sips-be 
+  - name: build
+    image: plugins/docker  
+    settings:
+      debug: false
+      username: 
+        from_secret: REGISTRY_USER
+      password:
+        from_secret: REGISTRY_PASSWORD
+      repo: orlandobrea/dashboard-migracion-sips-be 
 
   - name: gitops_release
     image: alpine/git
     commands:
-      - echo "ls inicial"
-      - ls -lah
       - apk update && apk add yq
       - git clone https://github.com/orlandobrea/gitops-kubernetes.git
       - cd gitops-kubernetes
       - git checkout $DRONE_BRANCH
-      - echo "ls luego de checkout"
-      - ls -lah
       - echo "Actualizando version del deployment a "$(cat ../.version_tag)
       - cd dashboard_migration_sips 
       - yq w -i values.yaml backend.version $(cat ../../.version_tag)
