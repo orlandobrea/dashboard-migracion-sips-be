@@ -10,7 +10,7 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "jq '.version=\"${nextRelease.version}\"' package.json  > package.json"
+        "prepareCmd": "npx jq '.version=\"${nextRelease.version}\"' package.json  > package.json"
       }
     ]
   ]
