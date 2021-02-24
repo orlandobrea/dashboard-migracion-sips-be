@@ -6,7 +6,7 @@ name: default
 steps:
 
   - name: test
-    image: docker:dind
+    image: node:12-alpine
     environment:
       GITHUB_TOKEN:
         from_secret: GITHUB_TOKEN
