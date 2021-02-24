@@ -5,6 +5,15 @@ name: default
 
 steps:
 
+  - name: test
+    image: docker:dind
+    environment:
+      GITHUB_TOKEN:
+        from_secret: GITHUB_TOKEN
+    commands:
+      - apk update && apk add nodejs npm 
+      - npm install
+      - npm run test
   - name: release
     image: docker:dind
     environment:
