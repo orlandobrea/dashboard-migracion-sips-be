@@ -5,7 +5,6 @@ const dotenv = require('dotenv');
 const { version } = require('./package.json');
 
 dotenv.config();
-const PORT = process.env.PORT ? process.env.PORT : 3000;
 
 app.use(
   cors({
@@ -46,4 +45,7 @@ app.get('/', async (req, res) => {
   }
 });
 
-module.exports = app
+module.exports = {
+  app,
+  connect,
+};
