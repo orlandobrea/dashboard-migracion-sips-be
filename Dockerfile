@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package.json /app/
 RUN npm install --only=prod
 COPY app.js /app/
+COPY server.js /app/
 
 ENV DB_SERVER localhost
 ENV DB_DATABASE SIPS
