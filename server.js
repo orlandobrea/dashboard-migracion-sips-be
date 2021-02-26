@@ -3,6 +3,7 @@ const cors = require('express-cors');
 const mssql = require('mssql');
 const dotenv = require('dotenv');
 const { version } = require('./package.json');
+const moment = require('moment');
 
 dotenv.config();
 
@@ -36,10 +37,19 @@ app.get('/health', (req, res) => {
 
 app.get('/', async (req, res) => {
   try {
+    const formatDate = (data) => moment.utc(data).utcOffset('-0300', true);
     const query = await mssql.query(
       `select lesg.*, le.NombreServidor from SIPS.dbo.LAB_EstadoSyncGeneral lesg left join SIPS.dbo.LAB_Efector le on lesg.idEfector=le.idEfector`,
     );
-    res.send(query.recordsets[0]);
+    console.log(query.recordsets[0])
+    const response = query.recordsets[0].map((row) => ({
+      ...row,
+      ultimoSyncFechaInicio: formatDate(row.ultimoSyncFechaInicio),
+      ultimoSyncFechaFin: formatDate(row.ultimoSyncFechaFin),
+      ultimoUpdateEfectorInicio: formatDate(row.ultimoUpdateEfectorInicio),
+      ultimoUpdateEfectorFin: formatDate(row.ultimoUpdateEfectorFin),
+    }));
+    res.send(response);
   } catch (e) {
     res.status(500).json(e);
   }
