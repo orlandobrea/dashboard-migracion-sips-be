@@ -1,3 +1,10 @@
+## [1.0.12](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.11...v1.0.12) (2021-02-26)
+
+
+### Bug Fixes
+
+* fechas en formato UTC ([5ba42bb](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/5ba42bb7adc5e0da55080731331268eb71ab5c7e))
+
 ## [1.0.11](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.10...v1.0.11) (2021-02-24)
 
 
