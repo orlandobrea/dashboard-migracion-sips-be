@@ -32,7 +32,7 @@ app.get('/version', (req, res) => {
 app.get('/health', (req, res) => {
   res.json({
     status: 'ok',
-  });
+  }); 
 });
 
 app.get('/', async (req, res) => {
