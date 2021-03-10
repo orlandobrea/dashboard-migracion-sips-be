@@ -1,3 +1,10 @@
+## [1.0.13](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.12...v1.0.13) (2021-03-10)
+
+
+### Bug Fixes
+
+* incremento version de server ([80fed73](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/80fed739cfb243d28dfe3b045c68f69bc8d75b1d))
+
 ## [1.0.12](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.11...v1.0.12) (2021-02-26)
 
 
