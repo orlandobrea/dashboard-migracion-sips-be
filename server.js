@@ -10,6 +10,7 @@ dotenv.config();
 app.use(
   cors({
     allowedOrigins: ['*'],
+    methods: ['GET'],
   }),
 );
 
@@ -32,7 +33,7 @@ app.get('/version', (req, res) => {
 app.get('/health', (req, res) => {
   res.json({
     status: 'ok',
-  }); 
+  });
 });
 
 app.get('/', async (req, res) => {
@@ -41,7 +42,7 @@ app.get('/', async (req, res) => {
     const query = await mssql.query(
       `select lesg.*, le.NombreServidor from SIPS.dbo.LAB_EstadoSyncGeneral lesg left join SIPS.dbo.LAB_Efector le on lesg.idEfector=le.idEfector`,
     );
-    console.log(query.recordsets[0])
+    console.log(query.recordsets[0]);
     const response = query.recordsets[0].map((row) => ({
       ...row,
       ultimoSyncFechaInicio: formatDate(row.ultimoSyncFechaInicio),
