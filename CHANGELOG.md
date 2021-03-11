@@ -1,3 +1,11 @@
+## [1.0.16](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.15...v1.0.16) (2021-03-11)
+
+
+### Bug Fixes
+
+* autoconnect to db when there's an error ([b1d6e49](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/b1d6e49aa203acf261532cd9ec184abd3e0f5472))
+* autoconnect to db when there's an error ([cbb5652](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/cbb56522790d5a23122fe5c9856e98c45d7d5838))
+
 ## [1.0.15](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.14...v1.0.15) (2021-03-11)
 
 
