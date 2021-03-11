@@ -1,3 +1,10 @@
+## [1.0.15](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.14...v1.0.15) (2021-03-11)
+
+
+### Bug Fixes
+
+* add cors to GET requests ([fe84c5e](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/fe84c5e9e33658032b94ffd7e83e32bc5db2fe11))
+
 ## [1.0.14](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.13...v1.0.14) (2021-03-11)
 
 
