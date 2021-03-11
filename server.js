@@ -20,6 +20,7 @@ const connect = async () => {
     );
   } catch (err) {
     console.log(err);
+    setTimeout(() => connect(), 5000)
   }
 };
 
