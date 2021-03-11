@@ -1,5 +1,5 @@
 const app = require('express')();
-const cors = require('express-cors');
+const cors = require('cors');
 const mssql = require('mssql');
 const dotenv = require('dotenv');
 const { version } = require('./package.json');
@@ -9,8 +9,7 @@ dotenv.config();
 
 app.use(
   cors({
-    allowedOrigins: ['*'],
-    methods: ['GET']
+    methods: ['GET', 'OPTIONS']
   }),
 );
 
