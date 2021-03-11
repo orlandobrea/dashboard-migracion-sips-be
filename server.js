@@ -9,7 +9,7 @@ dotenv.config();
 
 app.use(
   cors({
-    methods: ['GET', 'OPTIONS']
+    methods: ['GET', 'OPTIONS'],
   }),
 );
 
@@ -20,7 +20,7 @@ const connect = async () => {
     );
   } catch (err) {
     console.log(err);
-    setTimeout(() => connect(), 5000)
+    setTimeout(() => connect(), 5000);
   }
 };
 
