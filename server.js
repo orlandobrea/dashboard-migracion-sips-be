@@ -10,7 +10,7 @@ dotenv.config();
 app.use(
   cors({
     allowedOrigins: ['*'],
-    methods: ['GET'],
+    methods: ['GET']
   }),
 );
 
