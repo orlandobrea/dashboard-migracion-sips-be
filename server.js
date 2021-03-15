@@ -40,9 +40,10 @@ app.get('/', async (req, res) => {
   try {
     const formatDate = (data) => moment.utc(data).utcOffset('-0300', true);
     const query = await mssql.query(
-      `select lesg.*, le.NombreServidor from SIPS.dbo.LAB_EstadoSyncGeneral lesg left join SIPS.dbo.LAB_Efector le on lesg.idEfector=le.idEfector`,
+      `select lesg.*, le.NombreServidor 
+      from SIPS.dbo.LAB_EstadoSyncGeneral lesg 
+      left join SIPS.dbo.LAB_Efector le on lesg.idEfector=le.idEfector`,
     );
-    console.log(query.recordsets[0]);
     const response = query.recordsets[0].map((row) => ({
       ...row,
       ultimoSyncFechaInicio: formatDate(row.ultimoSyncFechaInicio),
