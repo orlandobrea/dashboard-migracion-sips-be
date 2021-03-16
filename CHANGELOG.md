@@ -1,3 +1,11 @@
+## [1.0.18](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.17...v1.0.18) (2021-03-16)
+
+
+### Bug Fixes
+
+* test canary rollback (40% fail) ([7a9a82a](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/7a9a82a402b5a830001e0817e9836c2592a79a60))
+* test rollback on canary with 40% fails ([7ea4f76](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/7ea4f76204ae5c0debd21ce7c9f546265894f5f8))
+
 ## [1.0.17](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.16...v1.0.17) (2021-03-15)
 
 
