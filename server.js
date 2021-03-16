@@ -31,9 +31,15 @@ app.get('/version', (req, res) => {
 });
 
 app.get('/health', (req, res) => {
-  res.json({
-    status: 'ok',
-  });
+  // fail 40% to test rollback - canary deployment
+  const ok = Math.random() > 0.6 ? true : false;
+  if (ok) {
+    res.status(500).json({ status: 'error' });
+  } else {
+    res.json({
+      status: 'ok',
+    });
+  }
 });
 
 app.get('/', async (req, res) => {
