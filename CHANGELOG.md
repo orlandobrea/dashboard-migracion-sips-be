@@ -1,3 +1,11 @@
+## [1.0.20](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.19...v1.0.20) (2021-03-17)
+
+
+### Bug Fixes
+
+* /health endpoint add db status ([69b911d](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/69b911da29f87f1499219c01624761d4ef574a42))
+* /health endpoint add db status ([4b9a32d](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/4b9a32d87085fa33dce019649c59cf230dc96156))
+
 ## [1.0.19](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.18...v1.0.19) (2021-03-17)
 
 
