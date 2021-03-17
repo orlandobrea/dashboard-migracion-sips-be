@@ -15,7 +15,7 @@ app.use(
 
 let connectionStatus = 'ok';
 
-mssql.on('error', (err) => (connectionStatus = 'error'));
+mssql.on('error', (_) => (connectionStatus = 'error'));
 
 const connect = async () => {
   try {
