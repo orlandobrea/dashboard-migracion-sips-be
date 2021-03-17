@@ -1,3 +1,11 @@
+## [1.0.19](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.18...v1.0.19) (2021-03-17)
+
+
+### Bug Fixes
+
+* add endpoint that fails 70% ([7700656](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/7700656c3b277317a8938eaa28b97b03fd99b319))
+* add endpoint that fails 70% ([07f1f3c](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/07f1f3c703354dd0952f2f022438692fab6c555e))
+
 ## [1.0.18](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.17...v1.0.18) (2021-03-16)
 
 
