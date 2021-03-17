@@ -1,0 +1,9 @@
+config:
+  target: http://dash-be.192-168-68-42.nip.io:30080
+  phases:
+    - duration: 60
+      arrivalRate: 10
+scenarios:
+  - flow:
+    - get:
+        url: "/unhealthy_endpoint"
