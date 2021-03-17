@@ -13,12 +13,18 @@ app.use(
   }),
 );
 
+let connectionStatus = 'ok';
+
+mssql.on('error', (err) => (connectionStatus = 'error'));
+
 const connect = async () => {
   try {
     await mssql.connect(
       `mssql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_SERVER}/${process.env.DB_DATABASE}`,
     );
+    connectionStatus = 'ok';
   } catch (err) {
+    connectionStatus = 'error';
     console.log(err);
     setTimeout(() => connect(), 5000);
   }
@@ -32,7 +38,10 @@ app.get('/version', (req, res) => {
 
 app.get('/health', (req, res) => {
   res.json({
-    status: 'ok',
+    status: {
+      app: 'ok',
+      db: connectionStatus,
+    },
   });
 });
 
