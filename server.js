@@ -46,7 +46,7 @@ app.get('/health', (req, res) => {
 });
 
 app.get('/unhealthy_endpoint', (req, res) => {
-  const ok = Math.random() > 0.15 ? true : false;
+  const ok = Math.random() > 0.03 ? true : false;
   if (!ok) {
     res.status(500).json({ status: 'error' });
   } else {
