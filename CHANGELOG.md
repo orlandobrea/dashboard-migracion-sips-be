@@ -1,3 +1,11 @@
+## [1.0.23](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.22...v1.0.23) (2021-03-18)
+
+
+### Bug Fixes
+
+* /unhealthy_endpoint 3% fails to pass an analysis ([cd967c7](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/cd967c7c31b82375c278d69fe624fbbad1718a6a))
+* /unhealthy_endpoint 3% fails to pass analysis ([aa60b3c](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/aa60b3cd7ec8b460ff777c796447e4c84f409205))
+
 ## [1.0.22](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.21...v1.0.22) (2021-03-18)
 
 
