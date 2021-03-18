@@ -1,3 +1,10 @@
+## [1.0.28](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.27...v1.0.28) (2021-03-18)
+
+
+### Bug Fixes
+
+* deploy version without fails ([3dfb752](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/3dfb7528544d57d0705cff14108c7794880512fd))
+
 ## [1.0.27](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.26...v1.0.27) (2021-03-18)
 
 
