@@ -1,3 +1,10 @@
+## [1.0.24](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.23...v1.0.24) (2021-03-18)
+
+
+### Bug Fixes
+
+* deploy almost healthy app (whithout analysis) ([c9d5636](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/c9d563637772b7327aba1a3386eff48435e18b14))
+
 ## [1.0.23](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.22...v1.0.23) (2021-03-18)
 
 
