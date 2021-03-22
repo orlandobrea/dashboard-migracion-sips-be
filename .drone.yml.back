@@ -1,0 +1,44 @@
+---
+kind: pipeline
+type: kubernetes
+name: default
+
+steps:
+  - name: release
+    image: docker:dind
+    environment:
+      GITHUB_TOKEN:
+        from_secret: GITHUB_TOKEN
+    commands:
+      - apk update && apk add git nodejs npm
+      - npm install
+      - npx semantic-release
+      - node -p "require('./package.json').version" | tr -d '\n' > .tags
+      - echo ",${DRONE_BRANCH},${DRONE_BRANCH}-${DRONE_COMMIT_SHA},latest" | tr -d '\n' >> .tags
+      - echo "Tagged version "$(cat .tags)
+
+  - name: build
+    image: plugins/docker  
+    settings:
+      debug: false
+      username: 
+        from_secret: REGISTRY_USER
+      password:
+        from_secret: REGISTRY_PASSWORD
+      # registry: ${DOCKER_REGISTRY_URL}
+      repo: orlandobrea/dashboard-migracion-sips-be 
+      # tags: ["${DRONE_BRANCH}", "${DRONE_BRANCH}-${DRONE_COMMIT_SHA}", $(cat APP_VERSION)]
+      # insecure: true
+  # Gitops Release
+  # - name: gitops_release
+    # image: alpine/git
+    # commands:
+# - apk update && apk add yq
+      # - git clone https://github.com/orlandobrea/gitops-kubernetes.git
+# - git checkout $DRONE_BRANCH
+      # - echo "Actualizando version del deployment a "$(cat .version_tag)
+# - cd dashboard_migration_sips 
+# - yq w -i values.yaml "backend.version" "0.0.1"
+# - yq w -i values.yaml backend.version $(cat .version_tag)
+# - git commit -m "ci: release ${$(cat .version_tag)}"
+# - git push origin $DRONE_BRANCH
