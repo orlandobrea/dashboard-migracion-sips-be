@@ -61,8 +61,8 @@ app.get('/', async (req, res) => {
     const formatDate = (data) => moment.utc(data).utcOffset('-0300', true);
     const query = await mssql.query(
       `select lesg.*, le.NombreServidor 
-      from SIPS.dbo.LAB_EstadoSyncGeneral lesg 
-      left join SIPS.dbo.LAB_Efector le on lesg.idEfector=le.idEfector`,
+      from SIPS.dbo.LAB_EstadoSyncGeneral lesg WITH (NOLOCK)
+      left join SIPS.dbo.LAB_Efector le WITH (NOLOCK) on lesg.idEfector=le.idEfector`,
     );
     const response = query.recordsets[0].map((row) => ({
       ...row,
