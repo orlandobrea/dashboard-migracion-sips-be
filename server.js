@@ -30,13 +30,13 @@ const connect = async () => {
   }
 };
 
-app.get('/version', (req, res) => {
+app.get('/api/version', (req, res) => {
   res.json({
     version: version,
   });
 });
 
-app.get('/health', (req, res) => {
+app.get('/api/health', (req, res) => {
   res.json({
     status: {
       app: 'ok',
@@ -45,7 +45,7 @@ app.get('/health', (req, res) => {
   });
 });
 
-app.get('/unhealthy_endpoint', (req, res) => {
+app.get('/api/unhealthy_endpoint', (req, res) => {
   const ok = Math.random() > 0 ? true : false;
   if (!ok) {
     res.status(500).json({ status: 'error' });
@@ -56,7 +56,7 @@ app.get('/unhealthy_endpoint', (req, res) => {
   }
 });
 
-app.get('/', async (req, res) => {
+app.get('/api', async (req, res) => {
   try {
     const formatDate = (data) => moment.utc(data).utcOffset('-0300', true);
     const query = await mssql.query(
