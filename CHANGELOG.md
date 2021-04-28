@@ -1,3 +1,15 @@
+## [1.0.35](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.34...v1.0.35) (2021-04-15)
+
+
+### Bug Fixes
+
+* update query to new table structure ([3bd8efb](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/3bd8efb7599d6140f1dbf1582e9674a729722eb4))
+
+
+### Performance Improvements
+
+* improve read performance (read uncommited) ([178ffdf](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/178ffdf45da6690eddc01e9cb8bd7f44aa92d048))
+
 ## [1.0.34](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.33...v1.0.34) (2021-03-22)
 
 
