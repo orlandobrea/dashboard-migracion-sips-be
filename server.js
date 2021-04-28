@@ -4,6 +4,8 @@ const mssql = require('mssql');
 const dotenv = require('dotenv');
 const {version} = require('./package.json');
 const moment = require('moment');
+const R = require('ramda');
+const axios = require('axios');
 
 dotenv.config();
 
@@ -36,8 +38,8 @@ app.get('/api/version', (req, res) => {
     });
 });
 
+app.get('/api/health', (req, res) => {
     res.json({
-        app.get('/api/health', (req, res) => {
         status: {
             app: 'ok',
             db: connectionStatus,
@@ -57,8 +59,35 @@ app.get('/api/unhealthy_endpoint', (req, res) => {
 });
 
 app.get('/api', async (req, res) => {
+    const formatDate = data => moment.utc(data).utcOffset('-0300', true);
+    const isHospital = R.pipe(R.pick(['device']), item => item && item.device.toLowerCase().includes('hospi'));
+    const parsePrtgResponse = R.pipe(
+        R.path(['data', 'sensors']),
+        // R.filter(isHospital),
+        R.map(R.pick(['device', 'status', 'group', 'sensor'])),
+    );
+    const doPRTGRequest = () =>
+        axios.get(
+            `${process.env.PRTG_SERVER}/api/table.json?content=sensors&username=${process.env.PRTG_USERNAME}&passhash=${process.env.PRTG_PASSWORD_HASH}`,
+        );
+    const getPRTGData = R.pipe(
+        doPRTGRequest,
+        R.otherwise(e => {
+            console.log('ERROR', e);
+            return {data: {sensors: []}};
+        }),
+        R.andThen(parsePrtgResponse),
+    );
+    // const getPingStatusByHospitalName = pingList => hospitalName =>
+    //     R.find(R.pipe(R.prop('device'), R.toLower(), R.includes(R.toLower(hospitalName))))(pingList);
+    const getPingStatusBySensorName = pingList => sensorName =>
+        R.find(data => data.sensor && data.sensor.toLowerCase().trim() == sensorName.toLowerCase().trim())(pingList);
+
     try {
-        const formatDate = data => moment.utc(data).utcOffset('-0300', true);
+        const prtgData = await getPRTGData();
+        const findPingBySensor = getPingStatusBySensorName(prtgData);
+        // const findPingByHospitalName = getPingStatusByHospitalName(prtgData);
+
         const query = await mssql.query(
             `select lesg.* 
       from SIPS.dbo.LAB_EstadoSyncGeneral lesg WITH (NOLOCK) `,
@@ -69,6 +98,11 @@ app.get('/api', async (req, res) => {
             ultimoSyncFechaFin: formatDate(row.ultimoSyncFechaFin),
             ultimoUpdateEfectorInicio: formatDate(row.ultimoUpdateEfectorInicio),
             ultimoUpdateEfectorFin: formatDate(row.ultimoUpdateEfectorFin),
+            pingStatus: row.sensorPingPRTG
+                ? R.pipe(findPingBySensor, pingObject => (pingObject ? R.prop('status')(pingObject) : '-'))(
+                      row.sensorPingPRTG,
+                  )
+                : '-',
         }));
         res.send(response);
     } catch (e) {

@@ -1,6 +1,6 @@
 {
   "name": "dashboard-migracion-sips-be",
-  "version": "1.0.34",
+  "version": "1.1.0",
   "description": "",
   "private": true,
   "main": "index.js",
@@ -19,11 +19,13 @@
     ]
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "moment": "^2.29.1",
-    "mssql": "^6.3.1"
+    "mssql": "^6.3.1",
+    "ramda": "^0.27.1"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
