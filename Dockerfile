@@ -1,10 +1,10 @@
 FROM node:15-alpine
 
-WORKDIR /app
+WORKDIR /dashboard
 COPY package.json /app/
 RUN npm install --only=prod
-COPY app.js /app/
-COPY server.js /app/
+COPY app.js /dashboard/
+COPY app /dashboard/app/
 
 ENV DB_SERVER localhost
 ENV DB_DATABASE SIPS
