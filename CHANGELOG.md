@@ -1,3 +1,10 @@
+## [1.0.37](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.36...v1.0.37) (2021-06-01)
+
+
+### Bug Fixes
+
+* dockerfile with new directory format ([23764cc](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/23764cc106847ee333fee53373964e096b8dbf12))
+
 ## [1.0.36](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.35...v1.0.36) (2021-06-01)
 
 
