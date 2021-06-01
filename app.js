@@ -1,9 +1,8 @@
-const {app, connect} = require('./server')
+const { app, connect, updateStatus } = require('./app/server');
 
 const PORT = process.env.PORT ? process.env.PORT : 3000;
 
 const server = app.listen(PORT, () => {
-  connect();
-  console.log(`App running on port ${PORT}`);
+    connect(updateStatus);
+    console.log(`App running on port ${PORT}`);
 });
-

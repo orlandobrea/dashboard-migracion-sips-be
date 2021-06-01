@@ -1,7 +1,7 @@
 const app = require('express')();
 const cors = require('cors');
 const dotenv = require('dotenv');
-const { version } = require('./package.json');
+const { version } = require('../package.json');
 const moment = require('moment');
 const R = require('ramda');
 const DB = require('./db');
