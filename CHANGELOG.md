@@ -1,3 +1,12 @@
+## [1.0.36](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.35...v1.0.36) (2021-06-01)
+
+
+### Bug Fixes
+
+* backend in /api route ([20c7473](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/20c747330de7e91ee2fc008602c9a217796a803f))
+* tests ([f0346f5](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/f0346f5fd15fee2c609305c9d9d88acbfb0abd6e))
+* wrong response when ping status is different ([1e95b6f](https://github.com/orlandobrea/dashboard-migracion-sips-be/commit/1e95b6f5160ad3c1c4ba7c51e086052bd6769cc1))
+
 ## [1.0.35](https://github.com/orlandobrea/dashboard-migracion-sips-be/compare/v1.0.34...v1.0.35) (2021-04-15)
 
 
