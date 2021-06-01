@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watchAll",
     "load_test:remote": "artillery run load_test/server_remote.yml",
     "load_test:local": "artillery run load_test/server_local.yml"
   },
