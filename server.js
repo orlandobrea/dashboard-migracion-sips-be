@@ -59,48 +59,49 @@ app.get('/api/unhealthy_endpoint', (req, res) => {
 });
 
 app.get('/api', async (req, res) => {
-    const formatDate = data => moment.utc(data).utcOffset('-0300', true);
-    const isHospital = R.pipe(R.pick(['device']), item => item && item.device.toLowerCase().includes('hospi'));
+    const formatDate = (data) => moment.utc(data).utcOffset('-0300', true);
+    const isHospital = R.pipe(R.pick(['device']), (item) => item && item.device.toLowerCase().includes('hospi'));
     const parsePrtgResponse = R.pipe(
         R.path(['data', 'sensors']),
         // R.filter(isHospital),
-        R.map(R.pick(['device', 'status', 'group', 'sensor'])),
+        R.map(R.pick(['device', 'status', 'group', 'sensor']))
     );
     const doPRTGRequest = () =>
         axios.get(
-            `${process.env.PRTG_SERVER}/api/table.json?content=sensors&username=${process.env.PRTG_USERNAME}&passhash=${process.env.PRTG_PASSWORD_HASH}`,
+            `${process.env.PRTG_SERVER}/api/table.json?content=sensors&username=${process.env.PRTG_USERNAME}&passhash=${process.env.PRTG_PASSWORD_HASH}`
         );
     const getPRTGData = R.pipe(
         doPRTGRequest,
-        R.otherwise(e => {
+        R.otherwise((e) => {
             console.log('ERROR', e);
-            return {data: {sensors: []}};
+            return { data: { sensors: [] } };
         }),
-        R.andThen(parsePrtgResponse),
+        R.andThen(parsePrtgResponse)
     );
     // const getPingStatusByHospitalName = pingList => hospitalName =>
     //     R.find(R.pipe(R.prop('device'), R.toLower(), R.includes(R.toLower(hospitalName))))(pingList);
-    const getPingStatusBySensorName = pingList => sensorName =>
-        R.find(data => data.sensor && data.sensor.toLowerCase().trim() == sensorName.toLowerCase().trim())(pingList);
+    const getPingStatusBySensorName = (pingList) => (sensorName) =>
+        R.find((data) => data.sensor && data.sensor.toLowerCase().trim() == sensorName.toLowerCase().trim())(pingList);
 
     try {
         const prtgData = await getPRTGData();
         const findPingBySensor = getPingStatusBySensorName(prtgData);
         // const findPingByHospitalName = getPingStatusByHospitalName(prtgData);
+        const pingStatus = (sensor) => (sensor ? (sensor.status == 'Disponible' ? 'Disponible' : 'Falla') : '-');
 
         const query = await mssql.query(
             `select lesg.* 
-      from SIPS.dbo.LAB_EstadoSyncGeneral lesg WITH (NOLOCK) `,
+      from SIPS.dbo.LAB_EstadoSyncGeneral lesg WITH (NOLOCK) `
         );
-        const response = query.recordsets[0].map(row => ({
+        const response = query.recordsets[0].map((row) => ({
             ...row,
             ultimoSyncFechaInicio: formatDate(row.ultimoSyncFechaInicio),
             ultimoSyncFechaFin: formatDate(row.ultimoSyncFechaFin),
             ultimoUpdateEfectorInicio: formatDate(row.ultimoUpdateEfectorInicio),
             ultimoUpdateEfectorFin: formatDate(row.ultimoUpdateEfectorFin),
             pingStatus: row.sensorPingPRTG
-                ? R.pipe(findPingBySensor, pingObject => (pingObject ? R.prop('status')(pingObject) : '-'))(
-                      row.sensorPingPRTG,
+                ? R.pipe(findPingBySensor, pingStatus)(
+                      row.sensorPingPRTG
                   )
                 : '-',
         }));
