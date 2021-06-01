@@ -2,7 +2,7 @@ const app = require('express')();
 const cors = require('cors');
 const mssql = require('mssql');
 const dotenv = require('dotenv');
-const {version} = require('./package.json');
+const { version } = require('./package.json');
 const moment = require('moment');
 const R = require('ramda');
 const axios = require('axios');
@@ -12,17 +12,18 @@ dotenv.config();
 app.use(
     cors({
         methods: ['GET', 'OPTIONS'],
-    }),
+    })
 );
 
 let connectionStatus = 'ok';
 
-mssql.on('error', _ => (connectionStatus = 'error'));
+mssql.on('error', (_) => (connectionStatus = 'error'));
 
 const connect = async () => {
+    console.log('prueba');
     try {
         await mssql.connect(
-            `mssql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_SERVER}/${process.env.DB_DATABASE}`,
+            `mssql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_SERVER}/${process.env.DB_DATABASE}`
         );
         connectionStatus = 'ok';
     } catch (err) {
@@ -50,7 +51,7 @@ app.get('/api/health', (req, res) => {
 app.get('/api/unhealthy_endpoint', (req, res) => {
     const ok = Math.random() > 0 ? true : false;
     if (!ok) {
-        res.status(500).json({status: 'error'});
+        res.status(500).json({ status: 'error' });
     } else {
         res.json({
             status: 'ok',
