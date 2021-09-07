@@ -78,6 +78,7 @@ app.get('/api', async (_, res) => {
             ultimoSyncFechaFin: formatDate(row.ultimoSyncFechaFin),
             ultimoUpdateEfectorInicio: formatDate(row.ultimoUpdateEfectorInicio),
             ultimoUpdateEfectorFin: formatDate(row.ultimoUpdateEfectorFin),
+            fechaUltimoEstudioMigrado: formatDate(row.fechaUltimoEstudioMigrado),
             pingStatus: row.sensorPingPRTG ? R.pipe(findPingBySensor, pingStatus)(row.sensorPingPRTG) : '-',
         }));
         res.send(response);
