@@ -1,10 +1,11 @@
 {
   "name": "dashboard-migracion-sips-be",
-  "version": "1.0.37",
+  "version": "1.1.1",
   "description": "",
   "private": true,
   "main": "index.js",
   "scripts": {
+    "start": "node app.js",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "load_test:remote": "artillery run load_test/server_remote.yml",
