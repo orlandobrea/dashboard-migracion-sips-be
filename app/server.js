@@ -6,6 +6,7 @@ const moment = require('moment');
 const Ramda = require('ramda');
 const DB = require('./db');
 const prtgService = require('./prtgService');
+const logger = require('pino');
 
 dotenv.config();
 
@@ -57,18 +58,20 @@ app.get('/api', async (_, res) => {
     const getPRTGData = Ramda.pipe(
         doPRTGRequest,
         Ramda.otherwise((e) => {
-            console.log('ERROR', e);
+            logger.error(e);
             return { data: { sensors: [] } };
         }),
         Ramda.andThen(parsePrtgResponse)
     );
     const getPingStatusBySensorName = (pingList) => (sensorName) =>
-        Ramda.find((data) => data.sensor && data.sensor.toLowerCase().trim() == sensorName.toLowerCase().trim())(pingList);
+        Ramda.find((data) => data.sensor && data.sensor.toLowerCase().trim() === sensorName.toLowerCase().trim())(
+            pingList
+        );
 
     try {
         const prtgData = await getPRTGData();
         const findPingBySensor = getPingStatusBySensorName(prtgData);
-        const pingStatus = (sensor) => (sensor ? (sensor.status == 'Disponible' ? 'Disponible' : 'Falla') : '-');
+        const pingStatus = (sensor) => (sensor ? (sensor.status === 'Disponible' ? 'Disponible' : 'Falla') : '-');
 
         const query = await DB.getSyncStatus();
 
@@ -83,7 +86,7 @@ app.get('/api', async (_, res) => {
         }));
         res.send(response);
     } catch (e) {
-        console.log(e);
+        logger.error(e);
         res.status(500).json(e);
     }
 });
