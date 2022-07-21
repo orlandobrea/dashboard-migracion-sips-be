@@ -121,7 +121,7 @@ describe('Endpoints', () => {
         expect(Array.isArray(res.body));
         expect(res.body.length).toEqual(4);
 
-        const findBySensorPing = (data) => (sensor) => data.find((item) => item.sensorPingPRTG == sensor);
+        const findBySensorPing = (data) => (sensor) => data.find((item) => item.sensorPingPRTG === sensor);
         const findInResponse = findBySensorPing(res.body);
         expect(findInResponse('Alfa 01'));
         expect(findInResponse('Alfa 01').pingStatus).toEqual('Disponible');
