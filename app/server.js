@@ -3,7 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const { version } = require('../package.json');
 const moment = require('moment');
-const R = require('ramda');
+const Ramda = require('ramda');
 const DB = require('./db');
 const prtgService = require('./prtgService');
 
@@ -23,7 +23,7 @@ DB.onError(() => (connectionStatus = 'error'));
 
 app.get('/api/version', (_, res) => {
     res.json({
-        version: version,
+        version,
     });
 });
 
@@ -49,21 +49,21 @@ app.get('/api/unhealthy_endpoint', (_, res) => {
 
 app.get('/api', async (_, res) => {
     const formatDate = (data) => moment.utc(data).utcOffset('-0300', true);
-    const parsePrtgResponse = R.pipe(
-        R.path(['data', 'sensors']),
-        R.map(R.pick(['device', 'status', 'group', 'sensor']))
+    const parsePrtgResponse = Ramda.pipe(
+        Ramda.path(['data', 'sensors']),
+        Ramda.map(Ramda.pick(['device', 'status', 'group', 'sensor']))
     );
     const doPRTGRequest = prtgService.getPRTGStatus;
-    const getPRTGData = R.pipe(
+    const getPRTGData = Ramda.pipe(
         doPRTGRequest,
-        R.otherwise((e) => {
+        Ramda.otherwise((e) => {
             console.log('ERROR', e);
             return { data: { sensors: [] } };
         }),
-        R.andThen(parsePrtgResponse)
+        Ramda.andThen(parsePrtgResponse)
     );
     const getPingStatusBySensorName = (pingList) => (sensorName) =>
-        R.find((data) => data.sensor && data.sensor.toLowerCase().trim() == sensorName.toLowerCase().trim())(pingList);
+        Ramda.find((data) => data.sensor && data.sensor.toLowerCase().trim() == sensorName.toLowerCase().trim())(pingList);
 
     try {
         const prtgData = await getPRTGData();
@@ -79,7 +79,7 @@ app.get('/api', async (_, res) => {
             ultimoUpdateEfectorInicio: formatDate(row.ultimoUpdateEfectorInicio),
             ultimoUpdateEfectorFin: formatDate(row.ultimoUpdateEfectorFin),
             fechaUltimoEstudioMigrado: formatDate(row.fechaUltimoEstudioMigrado),
-            pingStatus: row.sensorPingPRTG ? R.pipe(findPingBySensor, pingStatus)(row.sensorPingPRTG) : '-',
+            pingStatus: row.sensorPingPRTG ? Ramda.pipe(findPingBySensor, pingStatus)(row.sensorPingPRTG) : '-',
         }));
         res.send(response);
     } catch (e) {

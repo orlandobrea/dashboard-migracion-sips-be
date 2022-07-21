@@ -6,3 +6,5 @@ const server = app.listen(PORT, () => {
     connect(updateStatus);
     console.log(`App running on port ${PORT}`);
 });
+
+module.exports = server;
